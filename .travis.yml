@@ -1,5 +1,6 @@
 dist: xenial
 language: java
+script: ant main
 jdk:
 - openjdk11
 cache:

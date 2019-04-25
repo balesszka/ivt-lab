@@ -1,5 +1,11 @@
-# IVT Spaceship
+# EDIT EDIT IVT Spaceship
+**conflict fixed**
+ Branch-A edited this.
 
+Branch-B edited this.
+Or this.
+
+123
 This is a sample application for the [Integration and Verification Techniques](http://www.mit.bme.hu/oktatas/targyak/vimiac04) course at BME MIT.
 
 The application is simplified and deliberately contains bugs.

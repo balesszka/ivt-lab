@@ -8,35 +8,47 @@ import static org.mockito.Mockito.*;
 
 public class GT4500Test {
 
-  private DataAccess mockDA;
   private GT4500 ship;
+
+  TorpedoStore primary;
+  TorpedoStore secondary;
 
   @BeforeEach
   public void init(){
-    mockDA = mock(DataAccess.class);
-    ship = new GT4500(mockDA);
+    primary = mock(TorpedoStore.class);
+    secondary = mock(TorpedoStore.class);
+
+    this.ship = new GT4500(primary, secondary);
   }
 
   @Test
   public void fireTorpedo_Single_Success(){
     // Arrange
-    when(mockDA.fireTorpedo(FiringMode.SINGLE)).thenReturn(50);
-    // Act
-    ship.fireTorpedo(FiringMode.SINGLE);
+      when(primary.fire(1)).thenReturn(true);
 
-    // Assert
-    verify(mockDA, times(1)).fireTorpedo(FiringMode.SINGLE);
+      // Act
+      boolean result = ship.fireTorpedo(FiringMode.SINGLE);
+
+      // Assert
+      assertEquals(true, result);
+
+      verify(primary, times(1)).fire(1);
   }
 
   @Test
   public void fireTorpedo_All_Success(){
     // Arrange
-    when(mockDA.fireTorpedo(FiringMode.ALL)).thenReturn(50);
+    when(primary.fire(1)).thenReturn(true);
+    when(secondary.fire(1)).thenReturn(true);
+
     // Act
-    ship.fireTorpedo(FiringMode.ALL);
+    boolean result = ship.fireTorpedo(FiringMode.ALL);
 
     // Assert
-    verify(mockDA, times(1)).fireTorpedo(FiringMode.ALL);
+    assertEquals(true, result);
+
+    verify(primary, times(1)).fire(1);
+    verify(secondary, times(1)).fire(1);
   }
 
 }
